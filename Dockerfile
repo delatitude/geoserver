@@ -18,8 +18,8 @@ RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/${GEOSE
     ln -s geoserver-${GEOSERVER_VERSION} geoserver && \
     rm /tmp/geoserver-${GEOSERVER_VERSION}-bin.zip
 
-ADD startup.sh /opt/geoserver/bin/startup.sh
-RUN chmod +x /opt/geoserver/bin/startup.sh
+ADD startup.sh /opt/geoserver-${GEOSERVER_VERSION}/bin/startup.sh
+RUN chmod +x /opt/geoserver-${GEOSERVER_VERSION}/bin/startup.sh
 
-WORKDIR /opt/geoserver
-CMD ["/opt/geoserver/bin/startup.sh"]
+WORKDIR /opt/geoserver${GEOSERVER_VERSION}
+CMD ["/opt/geoserver${GEOSERVER_VERSION}/bin/startup.sh"]
