@@ -22,8 +22,8 @@ RUN wget -c https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7
          -O /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz && \
          mkdir /tmp/geoserver-untar
 
-RUN tar -zvxf /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz sqljdbc_6.0/enu/jre8/sqljdbc42.jar --directory /geoserver-2.15.0/webapps/geoserver/WEB-INF/lib/
-
+#RUN tar -zvxf /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz sqljdbc_6.0/enu/jre8/sqljdbc42.jar --directory /geoserver-2.15.0/webapps/geoserver/WEB-INF/lib/
+RUN tar --directory /geoserver-2.15.0/webapps/geoserver/WEB-INF/lib -zvxf /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz sqljdbc_6.0/enu/jre8/sqljdbc42.jar
 #COPY /tmp/geoserver-untar/sqljdbc42.jar  geoserver-2.15.0/webapps/geoserver/WEB-INF/lib/
 
 ADD startup.sh /geoserver-$GEOSERVER_VERSION/bin/startup.sh
