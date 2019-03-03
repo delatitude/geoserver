@@ -18,8 +18,13 @@ RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/${GEOSE
     ln -s geoserver-${GEOSERVER_VERSION} geoserver && \
     rm /tmp/geoserver-${GEOSERVER_VERSION}-bin.zip
 
-ADD startup.sh /opt/geoserver-2.15.0/bin/startup.sh
-RUN chmod +x /opt/geoserver-2.15.0/bin/startup.sh
+RUN wget -c https://download.microsoft.com/download/0/2/A/02AAE597-3865-456C-AE7F-613F99F850A8/sqljdbc_6.0.8112.200_enu.tar.gz \
+         -O /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz
+RUN tar -C /tmp/geoserver-untar -zxvf /tmp/geoserver-sqljdbc_6.0.8112.200_enu.tar.gz && \
+COPY /tmp/geoserver-untar/sqljdbc4.jar  geoserver-2.15.0/webapps/geoserver/WEB-INF/lib/
 
-WORKDIR /opt/geoserver-2.15.0
-CMD ["/opt/geoserver-2.15.0/bin/startup.sh"]
+ADD startup.sh /geoserver-${GEOSERVER_VERSION}/bin/startup.sh
+RUN chmod +x /geoserver-${GEOSERVER_VERSION}/bin/startup.sh
+
+WORKDIR /geoserver${GEOSERVER_VERSION}
+CMD ["/geoserver${GEOSERVER_VERSION}/bin/startup.sh"]
